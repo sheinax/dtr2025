@@ -37,6 +37,24 @@ function closeEmployeeModal() {
     
 }
 
+// schedule modal
+function openAddSchedule() {
+    document.getElementById('modalTitle').innerText = " Add Schedule";
+    document.getElementById('scheduleModal').style.display = 'flex';
+    document.getElementById('scheduleModal').style.justifyContent = 'center';
+    document.getElementById('scheduleModal').style.display = 'flex';
+
+
+        // Clear form fields
+        document.getElementById('scheduleForm').reset();
+    }
+    
+    function closeScheduleModal() {
+        document.getElementById('scheduleModal').style.display = 'none';
+        
+    
+}
+
 async function saveEmployee(event) {
     event.preventDefault();
 

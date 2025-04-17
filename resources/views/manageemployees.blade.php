@@ -114,17 +114,15 @@
             <!-- Add employee modal -->
             <div class="controls">
                 <button class="add-btn" onclick="openAddModal()">+ Add Employee</button>
+                <button class="add-btn" onclick="openAddSchedule()">+ Add Schedule</button>
 
                 <div class="filter-group">
                     <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="filterTable()" />
                     <select id="positionFilter" onchange="filterTable()">
                     <option value="">Select Position</option>
                                 <option value="Barista">Barista</option>
-                                <option value="Cashier">Cashier</option>
-                                <option value="Manager">Manager</option>
-                                <option value="Chef">Chef</option>
-                                <option value="Server">Server</option>
-                                <option value="Cleaner">Cleaner</option>
+                                <option value="Kitchen Staff">Kitchen Staff</option>
+                             
                     </select>
 
                     <div class="filter-group">
@@ -138,14 +136,16 @@
 
             </div>
 
-            <!-- Employee Table -->
-            <div class="employee-table">
+           
+
+  <!-- Employee Table -->
+  <div class="employee-table">
                 <h2>Employee Information</h2>
                 <table id="employeeTable">
                     <thead>
                         <tr>
                             <th>QR Code</th>
-                            <th>#ID</th>
+                            <th>Employee ID</th>
                             <th>Name</th>
                             <th>Age</th>
                             <th>Gender</th>
@@ -157,13 +157,20 @@
                         </tr>
                     </thead>
                     <tbody id="employeeBody">
-                        <!-- Sample Data (Example with QR Code) -->
-                        
+                        <!-- Employee rows will be inserted here by JavaScript -->
                     </tbody>
                 </table>
+
+                <div class="pagination">
+                    <button id="prevPage" onclick="changePage(-1)" disabled>
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <span id="pageNumber">Page 1</span>
+                    <button id="nextPage" onclick="changePage(1)">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
-
-
 
             <!-- Modal for Add/Edit Employee -->
             <div class="modal" id="employeeModal">
@@ -177,42 +184,76 @@
                         <input type="email" id="email" placeholder="Email" required />
                         <div class="password-field">
                             <input type="password" id="password" placeholder="Password" required />
-                            <button type="button" id="togglePassword" onclick="togglePasswordVisibility()">
-                                <ion-icon name="eye-outline"></ion-icon>
-                            </button>
                         </div>
                         <input type="text" id="name" placeholder="Name" required />
-                        <input type="number" id="salary" placeholder="salary" required />
+                        <input type="text" id="contactnum" placeholder="Contact Number" required />
+                        <input type="number" id="age" placeholder="Age" required />
+                        <input type="number" id="salary" placeholder="Salary" required />
                         <div class="agegen">
-                            <input type="number" id="age" placeholder="Age" required />
+                            <select id="type" required>
+                                <option value="">Type</option>
+                                <option value="regular">Regular</option>
+                                <option value="part-timer">Part-Timer</option>
+                            </select>
                             <select id="gender" required>
-                                <option value=""> Gender</option>
+                                <option value="">Gender</option>
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
                             </select>
                         </div>
 
-
                         <div class="possch">
-                            <!-- Dropdown for Position -->
                             <select id="position" required>
                                 <option value="">Select Position</option>
                                 <option value="Barista">Barista</option>
-                                <option value="Cashier">Cashier</option>
-                                <option value="Manager">Manager</option>
-                                <option value="Chef">Chef</option>
-                                <option value="Server">Server</option>
-                                <option value="Cleaner">Cleaner</option>
+                                <option value="Kitchen Staff">Kitchen Staff</option>
                             </select>
-
-                            
+                            <!-- <select id="schedule" required>
+                                <option value="">Schedule</option>
+                                <option value="Shift 1">Shift 1</option>
+                                <option value="Shift 2">Shift 2</option>
+                            </select> -->
                         </div>
 
                         <button type="submit">Save</button>
                     </form>
-
                 </div>
             </div>
+
+            <!-- schedule -->  
+
+            <div class="modal" id="scheduleModal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeScheduleModal()">&times;</span>
+
+    <form id="scheduleForm">
+    @csrf
+
+    <label>Select Day(s):</label><br>
+    <div>
+        <label><input type="checkbox" name="Day[]" value="Monday"> Monday</label><br>
+        <label><input type="checkbox" name="Day[]" value="Tuesday"> Tuesday</label><br>
+        <label><input type="checkbox" name="Day[]" value="Wednesday"> Wednesday</label><br>
+        <label><input type="checkbox" name="Day[]" value="Thursday"> Thursday</label><br>
+        <label><input type="checkbox" name="Day[]" value="Friday"> Friday</label><br>
+        <label><input type="checkbox" name="Day[]" value="Saturday"> Saturday</label><br>
+        <label><input type="checkbox" name="Day[]" value="Sunday"> Sunday</label>
+    </div><br>
+
+    <label for="StartTime">Start Time:</label>
+    <input type="time" id="StartTime" name="StartTime" required>
+
+    <label for="EndTime">End Time:</label>
+    <input type="time" id="EndTime" name="EndTime" required><br><br>
+
+    <select id="Shift" name="Shift" required>
+        <option value="">Select Shift</option>
+        <option value="Shift 1">Shift 1</option>
+        <option value="Shift 2">Shift 2</option>
+    </select><br><br>
+
+    <button type="submit">Save</button>
+</form>
 
         
             <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
