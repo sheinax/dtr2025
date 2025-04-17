@@ -19,7 +19,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/reports', function () { return view('reports');})->name('/reports');
     Route::get('/payroll', function () { return view('payroll');})->name('/payroll');
     
-    
+    //employee
+    Route::get('/e-dashboard', function () { return view('e-dashboard');})->name('/e-dashboard');
+    Route::get('/e-attendance', function () { return view('e-attendance');})->name('/e-attendance');
+    Route::get('/e-payroll', function () { return view('e-payroll');})->name('/e-payroll');
+    Route::get('logout', [AuthManager::class, 'logout'])->name('logout');
+
 
 });
 
